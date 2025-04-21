@@ -14,7 +14,7 @@ public class Program
 {
     private byte[] _ciphertext, _plaintext, _key, _associatedData, _nonce;
 
-    [Params(0, 16, 32, 64, 128, 256, 512, 1024, 1536, 2048, 16384, 32768, 65536, 131072, 1048576, 104857600, 52428800, 104857600)]
+    [Params(0, 16, 32, 64, 128, 256, 512, 1024, 1536, 2048, 16384, 32768, 65536, 131072, 1048576, 10485760, 52428800, 104857600)]
     public int PlaintextSize;
 
     [Params(0, 64, 1536)]
