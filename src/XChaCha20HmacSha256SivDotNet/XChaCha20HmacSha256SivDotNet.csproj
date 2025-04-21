@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+        <Authors>Samuel Lucas</Authors>
+        <Description>A .NET implementation of XChaCha20-HMAC-SHA256-SIV.</Description>
+        <Copyright>Copyright (c) 2025 Samuel Lucas</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/samuel-lucas6/XChaCha20-HMAC-SHA256-SIV</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/samuel-lucas6/XChaCha20-HMAC-SHA256-SIV</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>xchacha20 hmac-sha256 hmac sha256 siv s2v aead mrae</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Geralt" Version="3.3.0" />
+    </ItemGroup>
+
+</Project>
