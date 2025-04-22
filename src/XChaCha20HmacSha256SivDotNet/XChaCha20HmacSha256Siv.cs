@@ -68,13 +68,14 @@ public static class XChaCha20HmacSha256Siv
         hmac.AppendData(d);
         hmac.GetHashAndReset(d);
 
-        if (associatedDataLength > 0) {
-            foreach (var ad in associatedData) {
-                Dbl256(d);
-                hmac.AppendData(ad);
-                hmac.GetHashAndReset(tag);
-                Xor(d, tag, TagSize);
+        foreach (var ad in associatedData) {
+            if (ad.Length == 0) {
+                continue;
             }
+            Dbl256(d);
+            hmac.AppendData(ad);
+            hmac.GetHashAndReset(tag);
+            Xor(d, tag, TagSize);
         }
 
         if (plaintext.Length >= TagSize) {

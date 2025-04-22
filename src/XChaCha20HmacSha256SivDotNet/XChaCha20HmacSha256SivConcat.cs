@@ -56,20 +56,20 @@ public static class XChaCha20HmacSha256SivConcat
 
     private static void ComputeTag(Span<byte> tag, ReadOnlySpan<byte> plaintext, ReadOnlySpan<byte> macKey, params byte[][] associatedData)
     {
-        Span<byte> length = stackalloc byte[sizeof(ulong)];
+        Span<byte> lengths = stackalloc byte[16];
         using var hmac = IncrementalHash.CreateHMAC(HashAlgorithmName.SHA256, macKey);
         int associatedDataLength = associatedData.Length > 0 ? associatedData.Sum(ad => ad.Length) : associatedData.Length;
+        // Treat the associated data as one string
         if (associatedDataLength > 0) {
             foreach (var ad in associatedData) {
-                BinaryPrimitives.WriteUInt64LittleEndian(length, (ulong)ad.Length);
                 hmac.AppendData(ad);
-                hmac.AppendData(length);
             }
         }
-        // The length isn't required but doing it for consistency
-        BinaryPrimitives.WriteUInt64LittleEndian(length, (ulong)plaintext.Length);
         hmac.AppendData(plaintext);
-        hmac.AppendData(length);
+        // The plaintext length isn't required but doing it for consistency
+        BinaryPrimitives.WriteUInt64LittleEndian(lengths[..8], (ulong)associatedDataLength);
+        BinaryPrimitives.WriteUInt64LittleEndian(lengths[8..], (ulong)plaintext.Length);
+        hmac.AppendData(lengths);
         hmac.GetCurrentHash(tag);
     }
 }
